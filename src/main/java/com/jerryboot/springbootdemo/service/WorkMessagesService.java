@@ -17,7 +17,7 @@ public class WorkMessagesService {
 	public void save(WorkMessages msg) {
 		dao.save(msg);
 	}
-	
+	 
 	public WorkMessages getFirstNewMsg() {
 		return dao.findFirstByOrderByAddedDesc();
 		
