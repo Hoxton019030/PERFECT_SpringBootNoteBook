@@ -10,5 +10,9 @@ public class PageController {
 	public String index() {
 		return "index";
 	}
+	@GetMapping("/about")
+	public String gotoAbout() {
+		return "about";
+	}
 
 }

@@ -28,4 +28,6 @@ public interface CustomerDao extends JpaRepository<Customer, Integer> {
 	@Transactional
 	@Modifying //沒有Service Annotaion標註此項的話，要再修改資料的地方標註
 	public void deleteCustomerByName(String name);
+	
+	public List<Customer> findBylevelOrderByIdDesc(Integer level);
 }

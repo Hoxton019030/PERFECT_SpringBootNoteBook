@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,7 +34,15 @@ public class WorkMessages {
 	@Temporal(TemporalType.TIMESTAMP) // 存進去的資料型別
 	@Column(name = "added", columnDefinition = "datetime")
 	private Date added;
-
+	
+	@PrePersist //物件狀態轉到換Persistent之前
+	public void onCreate() {
+		if (added==null) {
+			added= new Date();
+		}
+		
+	}
+ 
 	public Integer getId() {
 		return id;
 	}

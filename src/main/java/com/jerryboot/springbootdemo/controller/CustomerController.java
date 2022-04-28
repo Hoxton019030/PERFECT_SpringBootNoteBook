@@ -134,4 +134,10 @@ public class CustomerController {
 		}
 		return false;
 	}
+	@GetMapping("customer/level/{level}")
+	public List<Customer> findBylevelOrderByIdDesc(@PathVariable("level") Integer level){
+		return dao.findBylevelOrderByIdDesc(level);
+		
+	}
+	
 }
