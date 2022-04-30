@@ -71,9 +71,44 @@ https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
   @GetMapping("/getProdict")
   public String getProduct1(int productId){
   //...find product code
-   return "some-page"
+   return "some-page";
   ```
   
-   ![image](https://user-images.githubusercontent.com/98711945/166092309-c9b62f61-5522-44b3-b1f7-a5aa53f83856.png)
-  ▲取得?id=的值
+
++ ModelAttribute
+  用於從From表單或是Model(通常會是一個JavaBean)中取得屬性值，
+  
+  ```Java
+  @PostMapping("/postProduct")
+  public String sendProduct(@ModelAttribute ProductModel product){
+  // ...some code
+  return "some-page";
+  ```
+  
++ HttpServletRequest
+  用HttpServletRequest接收參數
+  
+  ```Java
+  @PostMapping("/login")
+  public String checkLogin(HttpServletRequest request){
+  String username = request.getParameter("username");
+  String password = request.getParameter("password");
+  //...
+ 
+  ```
+# Spring Boot常用導入參數的方式
+
+  + @RequestParam
+    當請求參數不存在時，又不想報錯，可以使用required=false來指定該參數不是必須的
+
+  ```Java
+  @GetMapping("/getMapping")
+  public String getProduct2(@RequestParam(value="id",required=false)int id){
+  // ... some code
+  return "some-page";
+  ```
+  
+  + @RequestBody 用來接收JSON格式的資料
+  
+  
   
