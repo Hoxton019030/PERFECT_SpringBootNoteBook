@@ -55,7 +55,7 @@ https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
   
   + 取得路徑中的參數
      http://localhost:8080/getProduct/?productId=5
-       ```Java
+  ```Java
   
   @GetMapping("/getProdict")
   public String getProduct1(int productId){
