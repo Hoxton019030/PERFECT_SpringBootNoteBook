@@ -12,7 +12,36 @@ https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
 
   # 在application.properties裡可撰寫的設定
     
-![image](https://user-images.githubusercontent.com/98711945/165892010-e37a0498-2e64-4d36-8f8f-fe2102dafd68.png)
+
+`
+#埠號
+server.port=8080
+#Context Path
+server.servlet.context-path=/myapp
+#過濾器是否打開
+spring.mvc.hiddenmethod.filter.enabled=true
+
+#設定JSPjsp
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+
+#連線池的設定
+# Connntection Setting
+
+spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=SpringBootDB
+spring.datasource.username=你的SQL Server使用者名稱
+spring.datasource.password=你的SQL Server密碼
+
+# Jpa Settings
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.SQLServer2016Dialect
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+`
 
 
 # SpringMVC常用註釋
