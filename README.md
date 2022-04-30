@@ -138,5 +138,25 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
   
   + @RequestBody 用來接收JSON格式的資料
   
-  
+ # 如何在Spring 中啟用JSP
+ 
+  1. 在pom.xml中加入這幾段
+      ```
+    		<!-- START使用JSP的工具 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- END使用JSP的工具 -->
+    
+      ```
+    
+ 2. 在WEB-INF底下創建資料夾
+ ![image](https://user-images.githubusercontent.com/98711945/166095450-f3fa5a0d-abf6-4727-846f-c8e245353a78.png)
+
   
