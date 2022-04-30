@@ -38,6 +38,17 @@ https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
     
     ![image](https://user-images.githubusercontent.com/98711945/165896116-cb4e09db-89d8-48fd-b3fe-960bee6b9166.png)
     
+
+  
+  
++ @RestController
+
+  ![image](https://user-images.githubusercontent.com/98711945/166092473-2f404812-eeb6-4fbe-96c4-a7a141626c3a.png)
+
+  用來標記Restful風格的控制器類型，等同於在@Controller加上@ResponseBody，會直接回傳一個字串，通常用於回應Json格式的字串
+
+
+# Spring Boot常用取得參數的方式
 + @PathVariable
 
   將請求URL中的變數對應到功能處理方法的參數上，講白話文就是，取得URL中的變數作為程式的參數
@@ -66,15 +77,3 @@ https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
  ![image](https://user-images.githubusercontent.com/98711945/166092309-c9b62f61-5522-44b3-b1f7-a5aa53f83856.png)
   ▲取得?id=的值
   
-  
-+ @RestController
-
-![image](https://user-images.githubusercontent.com/98711945/166092473-2f404812-eeb6-4fbe-96c4-a7a141626c3a.png)
-
-  用來標記Restful風格的控制器類型，等同於在@Controller加上@ResponseBody，會直接回傳一個字串，通常用於回應Json格式的字串
-
-  
-  
-  
-  
-c
