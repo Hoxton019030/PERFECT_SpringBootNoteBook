@@ -4,7 +4,6 @@
 
 https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
 
-<h1>Spring官網設置<h1>
 # Spring官網設置
 
 ### 網址：<a href="https://start.spring.io/" target="_blank" >啟動器</a>
@@ -14,7 +13,7 @@ https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
   # 在application.properties裡可撰寫的設定
     
 
-`
+```
 #埠號
 server.port=8080
 #Context Path
@@ -41,14 +40,7 @@ spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
-
-<<<<<<< HEAD
-<h1>SpringMVC常用註釋<h1>
-
-<ul>
-  <li>@Controller</li>
-=======
-`
+```
 
 
 # SpringMVC常用註釋
@@ -56,28 +48,23 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
 
 + @Controller
   
->>>>>>> 06a21e29d335f5a845ddf179576b8e6edbf9933c
   控制器，編寫在類別上，表示是SpringMVC的Controller，負責處理由DispatcherServlet接收並分發過來的請求，通常寫在Controller的class上面
   
   ![image](https://user-images.githubusercontent.com/98711945/165895379-a0f9bcd0-8247-4fa3-a6fe-7212ed184a04.png)
   
-<<<<<<< HEAD
-  <li>@RequestMapping</li>
-=======
 + @RequestMapping
   
->>>>>>> 06a21e29d335f5a845ddf179576b8e6edbf9933c
   寫在Controller內的方法上，真正處理請求位址對應的註釋，若編寫在類別上，則代表該類別的所有回應請求的方法都已該位址為父位址，通常不會使用這個Annotaion，而是會使用更為精準的
   
    +  @GetMapping: 處理Get請求
     
     
-     ![image](https://user-images.githubusercontent.com/98711945/165896081-c1cf1e55-4c4e-4af3-ad30-5a4666ef121c.png)
+    ![image](https://user-images.githubusercontent.com/98711945/165896081-c1cf1e55-4c4e-4af3-ad30-5a4666ef121c.png)
 
     
     +  @PostMapping: 處理post請求
     
-        ![image](https://user-images.githubusercontent.com/98711945/165896116-cb4e09db-89d8-48fd-b3fe-960bee6b9166.png)
+    ![image](https://user-images.githubusercontent.com/98711945/165896116-cb4e09db-89d8-48fd-b3fe-960bee6b9166.png)
     
 
   
