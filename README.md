@@ -74,6 +74,6 @@ https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
    return "some-page"
   ```
   
- ![image](https://user-images.githubusercontent.com/98711945/166092309-c9b62f61-5522-44b3-b1f7-a5aa53f83856.png)
+   ![image](https://user-images.githubusercontent.com/98711945/166092309-c9b62f61-5522-44b3-b1f7-a5aa53f83856.png)
   ▲取得?id=的值
   
