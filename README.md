@@ -40,7 +40,36 @@ https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
     
 + @PathVariable
 
-將請求URL中的變數對應到功能處理方法的參數上，講白話文就是，取得URL中的變數作為程式的參數
+  將請求URL中的變數對應到功能處理方法的參數上，講白話文就是，取得URL中的變數作為程式的參數
+ 
+  
+  + 取得路徑中的值
+    http://localhost:8080/getProduct/{id}
+  ```Java
+  
+  @GetMapping("/getProdict/{id}")
+  public String getProduct1(@PathVariable int productId){
+  //...find product code
+   return "some-page"
+  ```
+  
+  + 取得路徑中的參數
+     http://localhost:8080/getProduct/?productId=5
+       ```Java
+  
+  @GetMapping("/getProdict")
+  public String getProduct1(int productId){
+  //...find product code
+   return "some-page"
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/98711945/166092309-c9b62f61-5522-44b3-b1f7-a5aa53f83856.png)
+  ▲取得?id=的值
++ @RestController
+
+![image](https://user-images.githubusercontent.com/98711945/166092473-2f404812-eeb6-4fbe-96c4-a7a141626c3a.png)
+
+  用來標記Restful風格的控制器類型，等同於在@Controller加上@ResponseBody，會直接回傳一個字串，通常用於回應Json格式的字串
 
   
   
