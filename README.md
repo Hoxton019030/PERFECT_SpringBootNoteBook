@@ -1,299 +1,418 @@
-# PERFECT_SpringBootNoteBook
+package Group1.MyShell.MVC.model;
 
-這是SpringBoot的筆記程式
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
+@Entity
+@Table(name = "Cryptocurrency")
+public class CryptocurrencyBean {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	private Integer id;
 
-# Spring官網設置
+	@Column(name = "Date")
+	private String date;
 
-### 網址：<a href="https://start.spring.io/" target="_blank" >啟動器</a>
-  
-![image](https://user-images.githubusercontent.com/98711945/165891446-10cf39ca-f9ad-4b23-98c2-20d7474b423d.png)
+	@Column(name = "Name_of_Cryptocurrency")
+	private String nameOfCryptocurrency;
 
-  # 在application.properties裡可撰寫的設定
-    
+	@Column(name = "Symbol_of_Cryptocurrency")
+	private String symbolOfCryptocurrency;
 
-```
-#埠號
-server.port=8080
-#Context Path
-server.servlet.context-path=/myapp
-#過濾器是否打開
-spring.mvc.hiddenmethod.filter.enabled=true
+	@Column(name = "Slug_of_Cryptocurrency")
+	private String slugOfCryptocurrency;
 
-#設定JSPjsp
-spring.mvc.view.prefix=/WEB-INF/jsp/
-spring.mvc.view.suffix=.jsp
+	@Column(name = "Max_Supply")
+	private Integer maxSupply;
 
-#連線池的設定
-# Connntection Setting
+	@Column(name = "Circulating_Supply")
+	private Integer circulatingSupply;
 
-spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
-spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=SpringBootDB
-spring.datasource.username=你的SQL Server使用者名稱
-spring.datasource.password=你的SQL Server密碼
+	@Column(name = "Percent_Change_1h")
+	private double percentChange1h;
 
-# Jpa Settings
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.SQLServer2016Dialect
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+	@Column(name = "Percent_Change_24h")
+	private double percentChange24h;
 
-```
+	@Column(name = "Percent_Change_7d")
+	private double percentChange7d;
 
+	@Column(name = "Percent_Change_30d")
+	private double percentChange30d;
 
-# SpringMVC常用註釋
-  
+	@Column(name = "Percent_Change_60d")
+	private double percentChange60d;
 
-+ @Controller
-  
-  控制器，編寫在類別上，表示是SpringMVC的Controller，負責處理由DispatcherServlet接收並分發過來的請求，通常寫在Controller的class上面
-  
+	@Column(name = "Percent_Change_90d")
+	private double percentChange90d;
 
+	@Column(name = "TWD_Price_of_Cryptocurrency")
+	private double TWDpriceOfCryptocurrency;
 
-  ```Java
-  @Controller
-    public class PageController{
-    @GetMapping("/")
-    public String index(){
-      return "index";
-    }
-    @GetMapping("/about")
-    public String gotoAbout(){
-      return "about";
-    }
-  }
-  ```
-  
-+ @RequestMapping
-  
-  寫在Controller內的方法上，真正處理請求位址對應的註釋，若編寫在類別上，則代表該類別的所有回應請求的方法都已該位址為父位址，通常不會使用這個Annotaion，而是會使用更為精準的
-  
-   +  @GetMapping: 處理Get請求
-    
-    
-   
-  ```Java
-  public Customer getCustomerById(@RequestParam("id") Integer id){
-    Optional<Customer> optional = dao.findById(id);
-    if(optional.isPresent()){
-      Customer resCUS=optional.get();
-      return resCus;
-    }
-    return null;
-  }
-  ```
+	@Column(name = "TWD_Market_Cap")
+	private double TWDmarketCap;
 
-    
-    +  @PostMapping: 處理post請求
-    
-   
-    ```JAVA
-    @PostMapping("customer/insert3")
-    public List<Customer> insertCustomer3(@RequestBody List<Customer> cus){
-      //@RequestBody:傳到Controller內的
-      //@ResponseBody:傳到Contoller外的
-      List<Customer> resCus= dao.saveAll(cus);
-      return resCus;
+	@Column(name = "TWD_Fully_Diluted_Market_Cap")
+	private double TWDfullyDilutedMarketCap;
 
-    }
-    ```
-    
+	@Column(name = "USD_Price_of_Cryptocurrency")
+	private double USDpriceOfCryptocurrency;
 
-  
-  
-+ @RestController
+	@Column(name = "USD_Market_Cap")
+	private double USDmarketCap;
 
- 
-  ```java
-  @RestController //表示本類別是一個符合RESTful，會回傳的都是JSON格式
-  public class CustomerController{
-    @Autowired//到IoC容器中尋找符合的Class
-    private Customer dao;
-    @PostMapping("customer/insert")
-    public Customer insertCustomer(){
-      //以下略
-      
-    }
-  }
-  ```
+	@Column(name = "USD_Fully_Diluted_Market_Cap")
+	private double USDfullyDilutedMarketCap;
 
-  用來標記Restful風格的控制器類型，等同於在@Controller加上@ResponseBody，會直接回傳一個字串，通常用於回應Json格式的字串
+	@Column(name = "CNY_Price_of_Cryptocurrency")
+	private double CNYpriceOfCryptocurrency;
 
+	@Column(name = "CNY_Market_Cap")
+	private double CNYmarketCap;
 
-# Spring Boot常用取得參數的方式
-+ @PathVariable
+	@Column(name = "CNY_Fully_Diluted_Market_Cap")
+	private double CNYfullyDilutedMarketCap;
 
-  將請求URL中的變數對應到功能處理方法的參數上，講白話文就是，取得URL中的變數作為程式的參數
- 
-  
-  + 取得路徑中的值
-    http://localhost:8080/getProduct/{id}
-  ```Java
-  
-  @GetMapping("/getProdict/{id}")
-  public String getProduct1(@PathVariable int productId){
-  //...find product code
-   return "some-page"
-  ```
-  
-  + 取得路徑中的參數
-     http://localhost:8080/getProduct/?productId=5
-  ```Java
-  
-  @GetMapping("/getProdict")
-  public String getProduct1(int productId){
-  //...find product code
-   return "some-page";
-  ```
-  
+	@Column(name = "JPY_Price_of_Cryptocurrency")
+	private double JPYpriceOfCryptocurrency;
 
-+ ModelAttribute
-  用於從From表單或是Model(通常會是一個JavaBean)中取得屬性值，
-  
-  ```Java
-  @PostMapping("/postProduct")
-  public String sendProduct(@ModelAttribute ProductModel product){
-  // ...some code
-  return "some-page";
-  ```
-  
-+ HttpServletRequest
-  用HttpServletRequest接收參數
-  
-  ```Java
-  @PostMapping("/login")
-  public String checkLogin(HttpServletRequest request){
-  String username = request.getParameter("username");
-  String password = request.getParameter("password");
-  //...
- 
-  ```
-# Spring Boot常用導入參數的方式
+	@Column(name = "JPY_Market_Cap")
+	private double JPYmarketCap;
 
-  + @RequestParam
-    當請求參數不存在時，又不想報錯，可以使用required=false來指定該參數不是必須的
+	@Column(name = "JPY_Fully_Diluted_Market_Cap")
+	private double JPYfullyDilutedMarketCap;
 
-  ```Java
-  @GetMapping("/getMapping")
-  public String getProduct2(@RequestParam(value="id",required=false)int id){
-  // ... some code
-  return "some-page";
-  ```
-  
-  + @RequestBody 用來接收JSON格式的資料
-  
-  
-  # 在Dao繼承JpaRepository<WorkMessages, Integer>以調用CRUD方法
-  ```java
-  private 
-  public interface WorkMessagesDao extends  JpaRepository<WorkMessages, Integer>{
-	
-	public WorkMessages findFirstByOrderByAddedDesc();
-  }
-  ```
-  ```java
-  public class WorkMessagesService {
+	@Column(name = "EUR_Price_of_Cryptocurrency")
+	private double EURpriceOfCryptocurrency;
 
-	@Autowired
-	private WorkMessagesDao dao;
+	@Column(name = "EUR_Market_Cap")
+	private double EURmarketCap;
 
-	public void save(WorkMessages msg) {
-  dao.save(msg);
+	@Column(name = "EUR_Fully_Diluted_Market_Cap")
+	private double EURfullyDilutedMarketCap;
+
+	public CryptocurrencyBean(String date, String nameOfCryptocurrency, String symbolOfCryptocurrency,
+			String slugOfCryptocurrency, Integer maxSupply, Integer circulatingSupply, double percentChange1h,
+			double percentChange24h, double percentChange7d, double percentChange30d, double percentChange60d,
+			double percentChange90d, double cNYpriceOfCryptocurrency, double cNYmarketCap,
+			double cNYfullyDilutedMarketCap, double eURpriceOfCryptocurrency, double eURmarketCap,
+			double eURfullyDilutedMarketCap, double tWDpriceOfCryptocurrency, double tWDmarketCap,
+			double tWDfullyDilutedMarketCap, double uSDpriceOfCryptocurrency, double uSDNYmarketCap,
+			double uSDfullyDilutedMarketCap, double jPYpriceOfCryptocurrency, double jPYmarketCap,
+			double jPYfullyDilutedMarketCap) {
+		super();
+		this.date = date;
+		this.nameOfCryptocurrency = nameOfCryptocurrency;
+		this.symbolOfCryptocurrency = symbolOfCryptocurrency;
+		this.slugOfCryptocurrency = slugOfCryptocurrency;
+		this.maxSupply = maxSupply;
+		this.circulatingSupply = circulatingSupply;
+		this.percentChange1h = percentChange1h;
+		this.percentChange24h = percentChange24h;
+		this.percentChange7d = percentChange7d;
+		this.percentChange30d = percentChange30d;
+		this.percentChange60d = percentChange60d;
+		this.percentChange90d = percentChange90d;
+		CNYpriceOfCryptocurrency = cNYpriceOfCryptocurrency;
+		CNYmarketCap = cNYmarketCap;
+		CNYfullyDilutedMarketCap = cNYfullyDilutedMarketCap;
+		EURpriceOfCryptocurrency = eURpriceOfCryptocurrency;
+		EURmarketCap = eURmarketCap;
+		EURfullyDilutedMarketCap = eURfullyDilutedMarketCap;
+		TWDpriceOfCryptocurrency = tWDpriceOfCryptocurrency;
+		TWDmarketCap = tWDmarketCap;
+		TWDfullyDilutedMarketCap = tWDfullyDilutedMarketCap;
+		USDpriceOfCryptocurrency = uSDpriceOfCryptocurrency;
+		USDmarketCap = uSDNYmarketCap;
+		USDfullyDilutedMarketCap = uSDfullyDilutedMarketCap;
+		JPYpriceOfCryptocurrency = jPYpriceOfCryptocurrency;
+		JPYmarketCap = jPYmarketCap;
+		JPYfullyDilutedMarketCap = jPYfullyDilutedMarketCap;
 	}
-  
-  ```
 
+	public CryptocurrencyBean() {
+	}
 
-  # Pagebel物件的使用
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CryptocurrencyBean [date=");
+		builder.append(date);
+		builder.append(", nameOfCryptocurrency=");
+		builder.append(nameOfCryptocurrency);
+		builder.append(", symbolOfCryptocurrency=");
+		builder.append(symbolOfCryptocurrency);
+		builder.append(", slugOfCryptocurrency=");
+		builder.append(slugOfCryptocurrency);
+		builder.append(", maxSupply=");
+		builder.append(maxSupply);
+		builder.append(", circulatingSupply=");
+		builder.append(circulatingSupply);
+		builder.append(", percentChange1h=");
+		builder.append(percentChange1h);
+		builder.append(", percentChange24h=");
+		builder.append(percentChange24h);
+		builder.append(", percentChange7d=");
+		builder.append(percentChange7d);
+		builder.append(", percentChange30d=");
+		builder.append(percentChange30d);
+		builder.append(", percentChange60d=");
+		builder.append(percentChange60d);
+		builder.append(", percentChange90d=");
+		builder.append(percentChange90d);
+		builder.append(", CNYpriceOfCryptocurrency=");
+		builder.append(CNYpriceOfCryptocurrency);
+		builder.append(", CNYmarketCap=");
+		builder.append(CNYmarketCap);
+		builder.append(", CNYfullyDilutedMarketCap=");
+		builder.append(CNYfullyDilutedMarketCap);
+		builder.append(", EURpriceOfCryptocurrency=");
+		builder.append(EURpriceOfCryptocurrency);
+		builder.append(", EURmarketCap=");
+		builder.append(EURmarketCap);
+		builder.append(", EURfullyDilutedMarketCap=");
+		builder.append(EURfullyDilutedMarketCap);
+		builder.append(", TWDpriceOfCryptocurrency=");
+		builder.append(TWDpriceOfCryptocurrency);
+		builder.append(", TWDmarketCap=");
+		builder.append(TWDmarketCap);
+		builder.append(", TWDfullyDilutedMarketCap=");
+		builder.append(TWDfullyDilutedMarketCap);
+		builder.append(", USDpriceOfCryptocurrency=");
+		builder.append(USDpriceOfCryptocurrency);
+		builder.append(", USDNYmarketCap=");
+		builder.append(USDmarketCap);
+		builder.append(", USDfullyDilutedMarketCap=");
+		builder.append(USDfullyDilutedMarketCap);
+		builder.append(", JPYpriceOfCryptocurrency=");
+		builder.append(JPYpriceOfCryptocurrency);
+		builder.append(", JPYmarketCap=");
+		builder.append(JPYmarketCap);
+		builder.append(", JPYfullyDilutedMarketCap=");
+		builder.append(JPYfullyDilutedMarketCap);
+		builder.append("]");
+		return builder.toString();
+	}
 
-  + ```java
-    Pageable request =PageRequest.of(0,3,Sort.Direction.DESC,"id");
-    ```
+	public String getDate() {
+		return date;
+	}
 
-    取得一個第`0`頁開始，一頁`3`筆資料，按`DESC`(降冪)排列，根據`id`欄位屬性降冪排列的Pageable物件,拿到`Pageable`物件就可以使用`PagingAndSortingRepository`內```findAll(Pageable pageable)```方法取得Page物件。
-    + page物件常用的方法
-      1. ```getTotalPages();```
-        取得Page物件內的總頁數
-      2. ```getTotalElemets();```
-        取得Page物件元素的總數
-      3. ```getNumber();```
-        取得目前的頁數(Page繼承的Slice物件內的方法)
-      4. ```getContent()```
-         取得Page物件內的資料List&lt;T>
+	public void setDate(String date) {
+		this.date = date;
+	}
 
-    
+	public String getNameOfCryptocurrency() {
+		return nameOfCryptocurrency;
+	}
 
-# JpaRepository的HQL中參數的寫法
+	public void setNameOfCryptocurrency(String nameOfCryptocurrency) {
+		this.nameOfCryptocurrency = nameOfCryptocurrency;
+	}
 
-  >
-   ###### 若要使用原生SQL做查詢，需在後面加上nativeQuery=true
-      用原生SQL做查詢的話，就不是對Entity操作了，會變成對Table操作，因此操作的屬性就變成table的屬性了
-  1. 根據參數位置(第幾個問號對應底下方法第幾個參數)
-  
-   
-      ```JAVA
-      @Query(value="from customer where name=?1"){
-      Person findCustomerByName(String name);
-      }
-      ```
-  2. 用:及@Param 做對應(★推薦)
-     ```java
-     @Query(value="from customer where name=:name) 
-     // 指Customer的名字name=:name要跟@Param("name")對應到
-     public List<Customer> findByName(@Param(value="name")String name);
-     ```
-#### 若在@Query做查詢時，若是要修改資料或是刪除資料，需要注意記得加上@Modifying
-  ```java
-     @Modifying
-     @Query(value="DELETE FROM customer where id=?1",nativeQuery=true){
-     void delAccount(int id);
-     }
-  ```
+	public String getSymbolOfCryptocurrency() {
+		return symbolOfCryptocurrency;
+	}
 
-# 自動創建SQL表格(補充)
-  1.  要先在`application.properties`裡面設定
-  `spring.jpa.hibernate.ddl-auto=update `
-  2.  在Bean裡面要這樣寫
-   `columnDefinition = "nvarchar(200)"`
-   `columnDefinition = "datetime"`，來讓SQL設定
-    
-      ```java
-      @Entity
-      @Table(name="work_messages")
-      public class WorkMessages {
+	public void setSymbolOfCryptocurrency(String symbolOfCryptocurrency) {
+		this.symbolOfCryptocurrency = symbolOfCryptocurrency;
+	}
 
-        public WorkMessages() {
-        }
+	public String getSlugOfCryptocurrency() {
+		return slugOfCryptocurrency;
+	}
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id")
-        private Integer id;
+	public void setSlugOfCryptocurrency(String slugOfCryptocurrency) {
+		this.slugOfCryptocurrency = slugOfCryptocurrency;
+	}
 
-        @Column(name = "next", columnDefinition = "nvarchar(200)")
-        private String text;
+	public Integer getMaxSupply() {
+		return maxSupply;
+	}
 
-        @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") // 從資料庫取出後轉格式
-        @Temporal(TemporalType.TIMESTAMP) // 存進去的資料型別
-        @Column(name = "added", columnDefinition = "datetime")
-        private Date added;
-      ```     
+	public void setMaxSupply(Integer maxSupply) {
+		this.maxSupply = maxSupply;
+	}
 
-    
-     
+	public Integer getCirculatingSupply() {
+		return circulatingSupply;
+	}
 
+	public void setCirculatingSupply(Integer circulatingSupply) {
+		this.circulatingSupply = circulatingSupply;
+	}
 
-    
-    
+	public double getPercentChange1h() {
+		return percentChange1h;
+	}
 
+	public void setPercentChange1h(double percentChange1h) {
+		this.percentChange1h = percentChange1h;
+	}
 
+	public double getPercentChange24h() {
+		return percentChange24h;
+	}
 
+	public void setPercentChange24h(double percentChange24h) {
+		this.percentChange24h = percentChange24h;
+	}
 
+	public double getPercentChange7d() {
+		return percentChange7d;
+	}
 
-  
-  
-  
+	public void setPercentChange7d(double percentChange7d) {
+		this.percentChange7d = percentChange7d;
+	}
 
-  
+	public double getPercentChange30d() {
+		return percentChange30d;
+	}
+
+	public void setPercentChange30d(double percentChange30d) {
+		this.percentChange30d = percentChange30d;
+	}
+
+	public double getPercentChange60d() {
+		return percentChange60d;
+	}
+
+	public void setPercentChange60d(double percentChange60d) {
+		this.percentChange60d = percentChange60d;
+	}
+
+	public double getPercentChange90d() {
+		return percentChange90d;
+	}
+
+	public void setPercentChange90d(double percentChange90d) {
+		this.percentChange90d = percentChange90d;
+	}
+
+	public double getCNYpriceOfCryptocurrency() {
+		return CNYpriceOfCryptocurrency;
+	}
+
+	public void setCNYpriceOfCryptocurrency(double cNYpriceOfCryptocurrency) {
+		CNYpriceOfCryptocurrency = cNYpriceOfCryptocurrency;
+	}
+
+	public double getCNYmarketCap() {
+		return CNYmarketCap;
+	}
+
+	public void setCNYmarketCap(double cNYmarketCap) {
+		CNYmarketCap = cNYmarketCap;
+	}
+
+	public double getCNYfullyDilutedMarketCap() {
+		return CNYfullyDilutedMarketCap;
+	}
+
+	public void setCNYfullyDilutedMarketCap(double cNYfullyDilutedMarketCap) {
+		CNYfullyDilutedMarketCap = cNYfullyDilutedMarketCap;
+	}
+
+	public double getEURpriceOfCryptocurrency() {
+		return EURpriceOfCryptocurrency;
+	}
+
+	public void setEURpriceOfCryptocurrency(double eURpriceOfCryptocurrency) {
+		EURpriceOfCryptocurrency = eURpriceOfCryptocurrency;
+	}
+
+	public double getEURmarketCap() {
+		return EURmarketCap;
+	}
+
+	public void setEURmarketCap(double eURmarketCap) {
+		EURmarketCap = eURmarketCap;
+	}
+
+	public double getEURfullyDilutedMarketCap() {
+		return EURfullyDilutedMarketCap;
+	}
+
+	public void setEURfullyDilutedMarketCap(double eURfullyDilutedMarketCap) {
+		EURfullyDilutedMarketCap = eURfullyDilutedMarketCap;
+	}
+
+	public double getTWDpriceOfCryptocurrency() {
+		return TWDpriceOfCryptocurrency;
+	}
+
+	public void setTWDpriceOfCryptocurrency(double tWDpriceOfCryptocurrency) {
+		TWDpriceOfCryptocurrency = tWDpriceOfCryptocurrency;
+	}
+
+	public double getTWDmarketCap() {
+		return TWDmarketCap;
+	}
+
+	public void setTWDmarketCap(double tWDmarketCap) {
+		TWDmarketCap = tWDmarketCap;
+	}
+
+	public double getTWDfullyDilutedMarketCap() {
+		return TWDfullyDilutedMarketCap;
+	}
+
+	public void setTWDfullyDilutedMarketCap(double tWDfullyDilutedMarketCap) {
+		TWDfullyDilutedMarketCap = tWDfullyDilutedMarketCap;
+	}
+
+	public double getUSDpriceOfCryptocurrency() {
+		return USDpriceOfCryptocurrency;
+	}
+
+	public void setUSDpriceOfCryptocurrency(double uSDpriceOfCryptocurrency) {
+		USDpriceOfCryptocurrency = uSDpriceOfCryptocurrency;
+	}
+
+	public double getUSDmarketCap() {
+		return USDmarketCap;
+	}
+
+	public void setUSDmarketCap(double uSDNYmarketCap) {
+		USDmarketCap = uSDNYmarketCap;
+	}
+
+	public double getUSDfullyDilutedMarketCap() {
+		return USDfullyDilutedMarketCap;
+	}
+
+	public void setUSDfullyDilutedMarketCap(double uSDfullyDilutedMarketCap) {
+		USDfullyDilutedMarketCap = uSDfullyDilutedMarketCap;
+	}
+
+	public double getJPYpriceOfCryptocurrency() {
+		return JPYpriceOfCryptocurrency;
+	}
+
+	public void setJPYpriceOfCryptocurrency(double jPYpriceOfCryptocurrency) {
+		JPYpriceOfCryptocurrency = jPYpriceOfCryptocurrency;
+	}
+
+	public double getJPYmarketCap() {
+		return JPYmarketCap;
+	}
+
+	public void setJPYmarketCap(double jPYmarketCap) {
+		JPYmarketCap = jPYmarketCap;
+	}
+
+	public double getJPYfullyDilutedMarketCap() {
+		return JPYfullyDilutedMarketCap;
+	}
+
+	public void setJPYfullyDilutedMarketCap(double jPYfullyDilutedMarketCap) {
+		JPYfullyDilutedMarketCap = jPYfullyDilutedMarketCap;
+	}
+
+}
