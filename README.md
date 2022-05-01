@@ -252,8 +252,34 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
      }
   ```
 
+# 自動創建SQL表格(補充)
+  1.  要先在`application.properties`裡面設定
+  `spring.jpa.hibernate.ddl-auto=update `
+  2.  在Bean裡面要這樣寫
+   `columnDefinition = "nvarchar(200)"`
+   `columnDefinition = "datetime"`，來讓SQL設定
+    
+      ```java
+      @Entity
+      @Table(name="work_messages")
+      public class WorkMessages {
 
-        
+        public WorkMessages() {
+        }
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id")
+        private Integer id;
+
+        @Column(name = "next", columnDefinition = "nvarchar(200)")
+        private String text;
+
+        @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") // 從資料庫取出後轉格式
+        @Temporal(TemporalType.TIMESTAMP) // 存進去的資料型別
+        @Column(name = "added", columnDefinition = "datetime")
+        private Date added;
+      ```     
 
     
      
