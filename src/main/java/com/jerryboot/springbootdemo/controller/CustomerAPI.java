@@ -18,7 +18,7 @@ import com.jerryboot.springbootdemo.model.Customer;
 import com.jerryboot.springbootdemo.model.CustomerDao;
 
 @RestController // 表示本Class回傳的都是JSON格式
-public class CustomerController {
+public class CustomerAPI {
 	@Autowired
 	private CustomerDao dao;
 
@@ -32,13 +32,18 @@ public class CustomerController {
 	}
 
 	@PostMapping("customer/insert2")
-
 	public Customer insertCustomer2(@RequestBody Customer cus) {
-		// @RequestBody:傳到Controller內的
-		// @Respo nseBody:傳到Contrller外的
+		// @RequestBody:丟進來的傳到Controller內的
+		// @ResponseBody:丟回去的。傳到Contrller外的
 		Customer resCus = dao.save(cus);
 		return resCus;
 	}
+
+//	public Customer insertCustomer2(@RequestBody Customer cus) {
+//		Customer rescus = dao.save(cus);
+//		return rescus;
+//		
+//	}
 
 	@PostMapping("customer/insert3")
 	public List<Customer> insertCustomer3(@RequestBody List<Customer> cus) {
@@ -48,16 +53,30 @@ public class CustomerController {
 		return resCus;
 	}
 
-	@GetMapping("customer/get")
+//	@PostMapping("customer/insert3")
+//	public List<Customer> insertCustomer3(@RequestBody List<Customer> cus){
+//		List<Customer> rescus = dao.saveAll(cus);
+//		return rescus;
+//	}
+
+//	@GetMapping("customer/get")
+//	public Customer getCustomerById(@RequestParam("id") Integer id) {
+//		// http://localhost:8080/myapp/customer/get?id=
+//		Optional<Customer> optional = dao.findById(id);
+//
+//		if (optional.isPresent()) {
+//			Customer resCus = optional.get();
+//			return resCus;
+//		}
+//
+//		return null;
+//	}
+	@GetMapping("/customer/get")
 	public Customer getCustomerById(@RequestParam("id") Integer id) {
-		// http://localhost:8080/myapp/customer/get?id=
 		Optional<Customer> optional = dao.findById(id);
-
 		if (optional.isPresent()) {
-			Customer resCus = optional.get();
-			return resCus;
+			return optional.get();
 		}
-
 		return null;
 	}
 
@@ -97,47 +116,77 @@ public class CustomerController {
 		dao.delete(cus);
 	}
 
-	@GetMapping("customer/page/{pageNumber}")
+	@GetMapping(value = "customer/page/{pageNumber}")
 	public List<Customer> findByPage(@PathVariable Integer pageNumber) {
 		PageRequest pgb = PageRequest.of(pageNumber - 1, 3, Sort.Direction.ASC, "id");
-		// (頁數,一頁幾筆資料,排序方式,排序依照)
 		Page<Customer> page = dao.findAll(pgb);
 		List<Customer> list = page.getContent();
 		return list;
 
 	}
 
-	@GetMapping("customer/findbyName")
+//	@GetMapping("customer/page/{pageNumber}")
+//	public List<Customer> findByPage(@PathVariable Integer pageNumber) {
+//		PageRequest pgb = PageRequest.of(pageNumber - 1, 3, Sort.Direction.ASC, "id");
+//		// (頁數,一頁幾筆資料,排序方式,排序依照)
+//		Page<Customer> page = dao.findAll(pgb);
+//		List<Customer> list = page.getContent();
+//		return list;
+//	}
+	@GetMapping("/customer/findbyName")
 	public List<Customer> findByName(@RequestParam("name") String name) {
 		List<Customer> list = dao.findCustomerByName(name);
 		return list;
 	}
 
+//	@GetMapping("customer/findbyName")
+//	public List<Customer> findByName(@RequestParam("name") String name) {
+//		List<Customer> list = dao.findCustomerByName(name);
+//		return list;
+//	}
+
+//	@GetMapping("customer/findbyName2")
+//	public List<Customer> findByName2(@RequestParam("name") String name) {
+//		List<Customer> list = dao.findCustomerByName2(name);
+//		return list;
+//	}
 	@GetMapping("customer/findbyName2")
 	public List<Customer> findByName2(@RequestParam("name") String name) {
-		List<Customer> list = dao.findCustomerByName2(name);
-		return list;
+		return dao.findCustomerByName2(name);
 	}
+
 	@GetMapping("customer/findbyName3")
-	public List<Customer> findByName3(@RequestParam("name") String name,@RequestParam("level") Integer level) {
-		List<Customer> list = dao.findCustomerByName3(name,level); 
+	public List<Customer> findByName3(@RequestParam("name") String name, @RequestParam("level") Integer level) {
+		List<Customer> list = dao.findCustomerByName3(name, level);
 		return list;
 	}
-	
+
 	@GetMapping("customer/delete")
 	public boolean deleteCustomer(@RequestParam("name")String name) {
 		List<Customer> findByName2 = findByName2(name);
-		
 		if(findByName2.isEmpty()==false) {
 			dao.deleteCustomerByName(name);
 			return true;
 		}
 		return false;
 	}
-	@GetMapping("customer/level/{level}")
-	public List<Customer> findBylevelOrderByIdDesc(@PathVariable("level") Integer level){
-		return dao.findBylevelOrderByIdDesc(level);
-		
+
+
+
+	@GetMapping("customer/delete3")
+	public boolean deleteCustomer3(@RequestParam("id") Integer id) {
+		Optional<Customer> resCus = dao.findById(id);
+		if (resCus.isPresent()) {
+			Integer targetId = resCus.get().getId();
+			dao.deleteCustomerById(targetId);
+			return true;
+		}
+		return false;
 	}
-	
+
+	@GetMapping("customer/level/{level}")
+	public List<Customer> findBylevelOrderByIdDesc(@PathVariable("level") Integer level) {
+		return dao.findBylevelOrderByIdDesc(level);
+	}
+
 }

@@ -15,6 +15,81 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+//@Entity
+//@Table(name="work_messages")
+//public class WorkMessages{
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name="id")
+//	private Integer id;
+//	
+//	//columnDefinition:若無此表格，則依照此annotaion的格式去創建一個NVARCHAR的欄位
+//	@Column(name="text",columnDefinition = "NVARCHAR(200")
+//	private String text;
+//	
+//	
+//	@DateTimeFormat(pattern ="yyyy/MM/dd HH:mm:ss")
+//	//設定時間格式
+//	@Temporal(TemporalType.TIMESTAMP)
+//	//設定SQL時間格式
+//	@Column(name="added", columnDefinition = "datetime")
+//	private Date added;
+//	
+//	
+//
+//
+//	public WorkMessages() {
+//		super();
+//	}
+//
+//
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
+//
+//
+//	public String getText() {
+//		return text;
+//	}
+//
+//
+//	public void setText(String text) {
+//		this.text = text;
+//	}
+//
+//
+//	public Date getAdded() {
+//		return added;
+//	}
+//
+//
+//	public void setAdded(Date added) {
+//		this.added = added;
+//	}
+//
+//
+//	public WorkMessages(Integer id, String text, Date added) {
+//		super();
+//		this.id = id;
+//		this.text = text;
+//		this.added = added;
+//	}
+//
+//
+//	@Override
+//	public String toString() {
+//		return "WorkMessages [id=" + id + ", text=" + text + ", added=" + added + "]";
+//	}
+//	
+//	
+//	
+//}
+
 @Entity
 @Table(name="work_messages")
 public class WorkMessages {
