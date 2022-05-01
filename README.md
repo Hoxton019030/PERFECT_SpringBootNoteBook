@@ -168,13 +168,13 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
 
     取得一個第`0`頁開始，一頁`3`筆資料，按`DESC`(降冪)排列，根據`id`欄位屬性降冪排列的Pageable物件,拿到`Pageable`物件就可以使用`PagingAndSortingRepository`內```findAll(Pageable pageable)```方法取得Page物件。
     + page物件常用的方法
-      1.```getTotalPages();```
+      1. ```getTotalPages();```
         取得Page物件內的總頁數
-      2.```getTotalElemets();```
+      2. ```getTotalElemets();```
         取得Page物件元素的總數
-      3.```getNumber();```
+      3. ```getNumber();```
         取得目前的頁數(Page繼承的Slice物件內的方法)
-      4.```getContent()```
+      4. ```getContent()```
          取得Page物件內的資料List&lt;T>
 
 # JpaRepository的HQL中參數的寫法
