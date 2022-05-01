@@ -50,7 +50,21 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
   
   控制器，編寫在類別上，表示是SpringMVC的Controller，負責處理由DispatcherServlet接收並分發過來的請求，通常寫在Controller的class上面
   
-  ![image](https://user-images.githubusercontent.com/98711945/165895379-a0f9bcd0-8247-4fa3-a6fe-7212ed184a04.png)
+
+
+  ```Java
+  @Controller
+    public class PageController{
+    @GetMapping("/")
+    public String index(){
+      return "index";
+    }
+    @GetMapping("/about")
+    public String gotoAbout(){
+      return "about";
+    }
+  }
+  ```
   
 + @RequestMapping
   
@@ -59,19 +73,51 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
    +  @GetMapping: 處理Get請求
     
     
-    ![image](https://user-images.githubusercontent.com/98711945/165896081-c1cf1e55-4c4e-4af3-ad30-5a4666ef121c.png)
+   
+  ```Java
+  public Customer getCustomerById(@RequestParam("id") Integer id){
+    Optional<Customer> optional = dao.findById(id);
+    if(optional.isPresent()){
+      Customer resCUS=optional.get();
+      return resCus;
+    }
+    return null;
+  }
+  ```
 
     
     +  @PostMapping: 處理post請求
     
-    ![image](https://user-images.githubusercontent.com/98711945/165896116-cb4e09db-89d8-48fd-b3fe-960bee6b9166.png)
+   
+    ```JAVA
+    @PostMapping("customer/insert3")
+    public List<Customer> insertCustomer3(@RequestBody List<Customer> cus){
+      //@RequestBody:傳到Controller內的
+      //@ResponseBody:傳到Contoller外的
+      List<Customer> resCus= dao.saveAll(cus);
+      return resCus;
+
+    }
+    ```
     
 
   
   
 + @RestController
 
-  ![image](https://user-images.githubusercontent.com/98711945/166092473-2f404812-eeb6-4fbe-96c4-a7a141626c3a.png)
+ 
+  ```java
+  @RestController //表示本類別是一個符合RESTful，會回傳的都是JSON格式
+  public class CustomerController{
+    @Autowired//到IoC容器中尋找符合的Class
+    private Customer dao;
+    @PostMapping("customer/insert")
+    public Customer insertCustomer(){
+      //以下略
+      
+    }
+  }
+  ```
 
   用來標記Restful風格的控制器類型，等同於在@Controller加上@ResponseBody，會直接回傳一個字串，通常用於回應Json格式的字串
 
