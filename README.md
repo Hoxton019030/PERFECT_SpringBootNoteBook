@@ -9,8 +9,10 @@ https://drive.google.com/drive/folders/1Ew-YkK0FVaJfmkTd3j_Y4jpAcl3_crqv
 ### 網址：<a href="https://start.spring.io/" target="_blank" >啟動器</a>
   
 ![image](https://user-images.githubusercontent.com/98711945/165891446-10cf39ca-f9ad-4b23-98c2-20d7474b423d.png)
+![image](https://user-images.githubusercontent.com/98711945/166162052-d10ea1bb-f133-4c3b-b435-75322f3ce929.png)
 
-  # 在application.properties裡可撰寫的設定
+
+# 在application.properties裡可撰寫的設定
     
 
 ```
@@ -304,6 +306,65 @@ public interface PagingAndSortingRepository<T, ID> extends CrudRepository<T, ID>
       ```     
 
     
+# 過濾器(用來做一些驗證)
+  官方網站:https://hibernate.org/validator/
+  官方文件:https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#validator-gettingstarted
+  + 範例
+  ```java
+  @Entity
+@Table(name = "work_messages")
+public class WorkMessages {
+
+	public WorkMessages() {
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
+
+	@Size(min = 1, max = 199,message="請輸入2到199的字串") //Validation
+	@Column(name = "next", columnDefinition = "nvarchar(200)")
+	private String text;
+
+   // ...
+}
+  ```
+  ```java
+  @PostMapping("/message/add")
+	public ModelAndView postMessage(ModelAndView mav, @Valid @ModelAttribute(name = "workMessages") WorkMessages msg,
+			BindingResult br) {
+		if (!br.hasErrors()) {
+			service.save(msg);
+			WorkMessages newMsg = new WorkMessages();
+			mav.getModel().put("workMessages", newMsg);
+		}
+		WorkMessages lastestMsg = service.getLastest();
+		mav.getModel().put("lastMessage",lastestMsg);
+		mav.setViewName("addMessage");
+		return mav;
+	}
+  ```
+
+
+  1. 先加入Dependency
+  ```
+   		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation  </artifactId>
+		  </dependency>
+  ```
+  1.  在Bean的屬性上加上想要的限制，例如限制字節長度的`@Size(min=10,max=100`,E-mail格式的`@E-Mail`之類的
+
+  2.  
+
+  
+
+   
+
+
+
+
      
 
 
