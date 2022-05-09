@@ -234,11 +234,24 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
 + ModelAttribute
   用於從From表單或是Model(通常會是一個JavaBean)中取得屬性值，
   
-  ```Java
-  @PostMapping("/postProduct")
-  public String sendProduct(@ModelAttribute ProductModel product){
-  // ...some code
-  return "some-page";
+  ```html
+  <form action="processForm3" method="get>
+	<input type="text" name="studentname" placeholder="請輸入姓名"/>
+	<input type="submit"/>
+  </form>
+  ```
+  
+  ```java
+  @GetMapping("/processForm3")
+  public String formAction(@RequestParam("studentname") String theName , Model model){
+  String result = "hi"+theName+"form processForm3";
+  model.addAttribute("message",result);
+  return "studnet_response"
+  ```
+  
+  ```html
+  <h1>回傳訊息:${message}</h1>
+  <!-- 會出現hi小明form processForm3 -->
   ```
   
 + HttpServletRequest
