@@ -253,7 +253,40 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
   <h1>回傳訊息:${message}</h1>
   <!-- 會出現hi小明form processForm3 -->
   ```
-  
+  ### form:form接收參數
+  在JSP中的From表單中如何讀取Model的資料
+  ```java
+
+  @GetMapping("/showCarForm)
+  public String showCarForm(Model model){
+      model.addAttribute("carBean",new Car());
+      return "car-form";
+  }
+  ```
+
+  ```html
+  <form:form action="carAction" modelAttribute="carBean" method="post">
+      brand:<form:input path="brand">
+      color:<form:input path="color">
+  <form:form>
+  ```
+  >使用Spring的\<form:form>，在form內使用modelAttribute代表model帶過來的物件，搭配底下path代表物件內的屬性
+
+  ```java
+  @PostMapping("/carAction")
+  public String formAction(@ModelAttribute("carBean") Car car,Model model){
+      System.out.println("car brand:"+car.getBrand());
+      return "car response";
+  }
+  ```
+  ```Html
+     <!-- 這是car response頁面  --> 
+     <h2>car:<h2>
+         <br/>
+         $(carBean.brand) and ${carBean.color}
+         <!-- 這個會回傳 form:form的path:brand>
+  ```
+
 + HttpServletRequest
   用HttpServletRequest接收參數
   
